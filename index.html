@@ -1,123 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Poolesville High School Schedule</title>
-    <style>
-      /* General Dark Theme */
-      body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #0d1117;
-        color: #c9d1d9;
-        margin: 0;
-        padding: 0;
-        text-align: center;
-      }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poolesville High School Schedule</title>
+  <style>
+    /* General Dark Theme */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0d1117;
+      color: #c9d1d9;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
 
-      header {
-        background: #161b22;
-        padding: 20px;
-        border-bottom: 1px solid #30363d;
-      }
+    header {
+      background: #161b22;
+      padding: 20px;
+      border-bottom: 1px solid #30363d;
+    }
 
-      h1 {
-        font-size: 2em;
-        margin: 0;
-        color: #58a6ff;
-      }
+    h1 {
+      font-size: clamp(1.5em, 4vw, 2.2em);
+      margin: 0;
+      color: #58a6ff;
+    }
 
-      #day {
-        font-size: 1.1em;
-        margin-top: 8px;
-        color: #8b949e;
-      }
+    #day {
+      font-size: 1em;
+      margin-top: 8px;
+      color: #8b949e;
+    }
 
-      .box {
-        margin: 30px auto;
-        padding: 25px;
-        background: #161b22;
-        border: 1px solid #30363d;
-        border-radius: 12px;
-        max-width: 600px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-      }
+    .box {
+      margin: 20px auto;
+      padding: 20px;
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      max-width: 600px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
 
-      #status {
-        font-size: 1.5em;
-        margin: 10px 0;
-        font-weight: bold;
-        color: #f0f6fc;
-      }
+    #status {
+      font-size: clamp(1.2em, 3vw, 1.6em);
+      margin: 10px 0;
+      font-weight: bold;
+      color: #f0f6fc;
+    }
 
-      #timer {
-        font-size: 2em;
-        color: #d62828;
-        margin-top: 10px;
-      }
+    #timer {
+      font-size: clamp(1.6em, 4vw, 2.2em);
+      color: #d62828;
+      margin-top: 10px;
+    }
 
-      table {
-        margin: 40px auto;
-        border-collapse: collapse;
-        width: 90%;
-        max-width: 800px;
-        background: #161b22;
-        border: 1px solid #30363d;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-      }
+    h2 {
+      margin-top: 30px;
+      font-size: clamp(1.2em, 3vw, 1.6em);
+      color: #58a6ff;
+    }
 
-      th,
-      td {
-        padding: 12px 15px;
-        border-bottom: 1px solid #30363d;
-      }
+    /* Schedule Table */
+    .table-container {
+      overflow-x: auto;
+      margin: 0 auto;
+      padding: 10px;
+      max-width: 95%;
+    }
 
-      th {
-        background-color: #21262d;
-        color: #58a6ff;
-        font-size: 1.1em;
-      }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      min-width: 400px;
+    }
 
-      tr:last-child td {
-        border-bottom: none;
-      }
+    th, td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #30363d;
+      font-size: clamp(0.9em, 2.5vw, 1em);
+    }
 
-      tr:hover {
-        background-color: #21262d;
-      }
+    th {
+      background-color: #21262d;
+      color: #58a6ff;
+      font-weight: 600;
+    }
 
-      footer {
-        margin-top: 40px;
-        padding: 20px;
-        font-size: 0.9em;
-        color: #8b949e;
-        border-top: 1px solid #30363d;
-      }
+    tr:last-child td {
+      border-bottom: none;
+    }
 
-      footer a {
-        color: #58a6ff;
-        text-decoration: none;
-      }
+    tr:hover {
+      background-color: #21262d;
+    }
 
-      footer a:hover {
-        text-decoration: underline;
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <h1>Poolesville High School Live Schedule</h1>
-      <div id="day"></div>
-    </header>
+    .current {
+      background-color: #1f6feb !important;
+      color: #fff;
+      font-weight: bold;
+    }
 
-    <div class="box">
-      <div id="status">Loading...</div>
-      <div id="timer"></div>
-    </div>
+    footer {
+      margin-top: 40px;
+      padding: 20px;
+      font-size: 0.9em;
+      color: #8b949e;
+      border-top: 1px solid #30363d;
+    }
 
-    <!-- Bell Schedule -->
-    <h2>Bell Schedule</h2>
+    footer a {
+      color: #58a6ff;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Poolesville High School Live Schedule</h1>
+    <div id="day"></div>
+  </header>
+
+  <div class="box">
+    <div id="status">Loading...</div>
+    <div id="timer"></div>
+  </div>
+
+  <!-- Bell Schedule -->
+  <h2>Bell Schedule</h2>
+  <div class="table-container">
     <table id="schedule-table">
       <thead>
         <tr>
@@ -129,165 +150,148 @@
       </thead>
       <tbody></tbody>
     </table>
+  </div>
 
-    <footer>
-      <p>Made by <strong>Andrew Nguyen</strong></p>
-      <p>
-        Contact:
-        <a href="mailto:andrewnguyenvb@gmail.com">andrewnguyenvb@gmail.com</a>
-        if there are issues
-      </p>
-    </footer>
+  <footer>
+    <p>Made by <strong>Andrew Nguyen</strong></p>
+    <p>Contact: <a href="mailto:andrewnguyenvb@gmail.com">andrewnguyenvb@gmail.com</a> if there are issues</p>
+  </footer>
 
-    <script>
-      // Define schedules
-      const regularSchedule = [
-        { name: "Period 1", start: "07:45", end: "08:35" },
-        { name: "Transition", start: "08:35", end: "08:40" },
-        { name: "Period 2", start: "08:40", end: "09:25" },
-        { name: "Transition", start: "09:25", end: "09:30" },
-        { name: "Period 3", start: "09:30", end: "10:15" },
-        { name: "Transition", start: "10:15", end: "10:20" },
-        { name: "Period 4", start: "10:20", end: "11:05" },
-        { name: "Lunch", start: "11:05", end: "12:00" },
-        { name: "Period 5", start: "12:05", end: "12:50" },
-        { name: "Transition", start: "12:50", end: "12:55" },
-        { name: "Period 6", start: "12:55", end: "13:40" },
-        { name: "Transition", start: "13:40", end: "13:45" },
-        { name: "Period 7", start: "13:45", end: "14:30" },
-        { name: "Transition", start: "14:30", end: "14:37" },
-        { name: "Period 8", start: "14:37", end: "15:25" },
-      ];
+  <script>
+    // Define schedules
+    const regularSchedule = [
+      { name: "Period 1", start: "07:45", end: "08:35" },
+      { name: "Transition", start: "08:35", end: "08:40" },
+      { name: "Period 2", start: "08:40", end: "09:25" },
+      { name: "Transition", start: "09:25", end: "09:30" },
+      { name: "Period 3", start: "09:30", end: "10:15" },
+      { name: "Transition", start: "10:15", end: "10:20" },
+      { name: "Period 4", start: "10:20", end: "11:05" },
+      { name: "Lunch", start: "11:05", end: "12:00" },
+      { name: "Period 5", start: "12:05", end: "12:50" },
+      { name: "Transition", start: "12:50", end: "12:55" },
+      { name: "Period 6", start: "12:55", end: "13:40" },
+      { name: "Transition", start: "13:40", end: "13:45" },
+      { name: "Period 7", start: "13:45", end: "14:30" },
+      { name: "Transition", start: "14:30", end: "14:37" },
+      { name: "Period 8", start: "14:37", end: "15:25" },
+    ];
 
-      const wednesdaySchedule = [
-        { name: "Period 1", start: "07:45", end: "08:30" },
-        { name: "Transition", start: "08:30", end: "08:35" },
-        { name: "Period 2", start: "08:35", end: "09:15" },
-        { name: "Transition", start: "09:15", end: "09:20" },
-        {
-          name: "Homeroom (Falcon Time/Advisory)",
-          start: "09:20",
-          end: "10:00",
-        },
-        { name: "Transition", start: "10:00", end: "10:05" },
-        { name: "Period 3", start: "10:05", end: "10:45" },
-        { name: "Transition", start: "10:45", end: "10:50" },
-        { name: "Period 4", start: "10:50", end: "11:30" },
-        { name: "Lunch", start: "11:30", end: "12:15" },
-        { name: "Period 5", start: "12:20", end: "13:00" },
-        { name: "Transition", start: "13:00", end: "13:05" },
-        { name: "Period 6", start: "13:05", end: "13:45" },
-        { name: "Transition", start: "13:45", end: "13:50" },
-        { name: "Period 7", start: "13:50", end: "14:30" },
-        { name: "Transition", start: "14:30", end: "14:37" },
-        { name: "Period 8", start: "14:37", end: "15:25" },
-      ];
+    const wednesdaySchedule = [
+      { name: "Period 1", start: "07:45", end: "08:30" },
+      { name: "Transition", start: "08:30", end: "08:35" },
+      { name: "Period 2", start: "08:35", end: "09:15" },
+      { name: "Transition", start: "09:15", end: "09:20" },
+      { name: "Homeroom (Falcon Time/Advisory)", start: "09:20", end: "10:00" },
+      { name: "Transition", start: "10:00", end: "10:05" },
+      { name: "Period 3", start: "10:05", end: "10:45" },
+      { name: "Transition", start: "10:45", end: "10:50" },
+      { name: "Period 4", start: "10:50", end: "11:30" },
+      { name: "Lunch", start: "11:30", end: "12:15" },
+      { name: "Period 5", start: "12:20", end: "13:00" },
+      { name: "Transition", start: "13:00", end: "13:05" },
+      { name: "Period 6", start: "13:05", end: "13:45" },
+      { name: "Transition", start: "13:45", end: "13:50" },
+      { name: "Period 7", start: "13:50", end: "14:30" },
+      { name: "Transition", start: "14:30", end: "14:37" },
+      { name: "Period 8", start: "14:37", end: "15:25" },
+    ];
 
-      function getTodaySchedule() {
-        const now = new Date();
-        const day = now.getDay(); // 0=Sunday, 1=Monday...6=Saturday
-        if (day === 0 || day === 6) return null; // weekend
-        if (day === 3) return wednesdaySchedule; // Wednesday
-        return regularSchedule; // Mon/Tue/Thu/Fri
+    function getTodaySchedule() {
+      const now = new Date();
+      const day = now.getDay();
+      if (day === 0 || day === 6) return null; 
+      if (day === 3) return wednesdaySchedule; 
+      return regularSchedule; 
+    }
+
+    function parseTime(str) {
+      const [h, m] = str.split(":").map(Number);
+      const now = new Date();
+      now.setHours(h, m, 0, 0);
+      return now;
+    }
+
+    function updateClock() {
+      const now = new Date();
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      document.getElementById("day").innerText = now.toLocaleDateString(undefined, options);
+
+      const schedule = getTodaySchedule();
+      if (!schedule) {
+        document.getElementById("status").innerText = "No School Today (Weekend)";
+        document.getElementById("timer").innerText = "";
+        updateScheduleTable([]);
+        return;
       }
 
-      function parseTime(str) {
-        const [h, m] = str.split(":").map(Number);
-        const now = new Date();
-        now.setHours(h, m, 0, 0);
-        return now;
-      }
+      updateScheduleTable(schedule);
 
-      function updateClock() {
-        const now = new Date();
-        const options = {
-          weekday: "long",
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        };
-        document.getElementById("day").innerText = now.toLocaleDateString(
-          undefined,
-          options
-        );
-
-        const schedule = getTodaySchedule();
-        if (!schedule) {
-          document.getElementById("status").innerText =
-            "No School Today (Weekend)";
-          document.getElementById("timer").innerText = "";
-          updateScheduleTable([]);
-          return;
-        }
-
-        updateScheduleTable(schedule);
-
-        let currentPeriod = null;
-        for (let p of schedule) {
-          const start = parseTime(p.start);
-          const end = parseTime(p.end);
-          if (now >= start && now < end) {
-            currentPeriod = { ...p, end };
-            break;
-          }
-        }
-
-        const firstStart = parseTime(schedule[0].start);
-        if (now < firstStart) {
-          const diff = firstStart - now;
-          document.getElementById("status").innerText =
-            "School hasn't started yet";
-          document.getElementById("timer").innerText =
-            formatTime(diff) + " until school starts";
-          return;
-        }
-
-        const lastEnd = parseTime(schedule[schedule.length - 1].end);
-        if (now >= lastEnd) {
-          document.getElementById("status").innerText =
-            "School is over for today";
-          document.getElementById("timer").innerText = "";
-          return;
-        }
-
-        if (currentPeriod) {
-          const diff = currentPeriod.end - now;
-          document.getElementById("status").innerText =
-            currentPeriod.name + " is in progress";
-          document.getElementById("timer").innerText =
-            formatTime(diff) + " left";
-        } else {
-          document.getElementById("status").innerText = "Transition Period";
-          const nextPeriod = schedule.find((p) => parseTime(p.start) > now);
-          if (nextPeriod) {
-            const diff = parseTime(nextPeriod.start) - now;
-            document.getElementById("timer").innerText =
-              formatTime(diff) + " until " + nextPeriod.name;
-          }
+      let currentPeriod = null;
+      for (let p of schedule) {
+        const start = parseTime(p.start);
+        const end = parseTime(p.end);
+        if (now >= start && now < end) {
+          currentPeriod = { ...p, end };
+          break;
         }
       }
 
-      function formatTime(ms) {
-        let totalSeconds = Math.floor(ms / 1000);
-        let minutes = Math.floor(totalSeconds / 60);
-        let seconds = totalSeconds % 60;
-        return `${minutes}m ${seconds < 10 ? "0" : ""}${seconds}s`;
+      const firstStart = parseTime(schedule[0].start);
+      if (now < firstStart) {
+        const diff = firstStart - now;
+        document.getElementById("status").innerText = "School hasn't started yet";
+        document.getElementById("timer").innerText = formatTime(diff) + " until school starts";
+        return;
       }
 
-      function updateScheduleTable(schedule) {
-        const tbody = document.querySelector("#schedule-table tbody");
-        tbody.innerHTML = "";
-        if (!schedule.length) return;
-        const day = new Date().getDay() === 3 ? "Wednesday" : "Regular Day";
-        schedule.forEach((p) => {
-          const row = document.createElement("tr");
-          row.innerHTML = `<td>${p.name}</td><td>${p.start}</td><td>${p.end}</td><td>${day}</td>`;
-          tbody.appendChild(row);
-        });
+      const lastEnd = parseTime(schedule[schedule.length - 1].end);
+      if (now >= lastEnd) {
+        document.getElementById("status").innerText = "School is over for today";
+        document.getElementById("timer").innerText = "";
+        return;
       }
 
-      setInterval(updateClock, 1000);
-      updateClock();
-    </script>
-  </body>
+      if (currentPeriod) {
+        const diff = currentPeriod.end - now;
+        document.getElementById("status").innerText = currentPeriod.name + " is in progress";
+        document.getElementById("timer").innerText = formatTime(diff) + " left";
+      } else {
+        document.getElementById("status").innerText = "Transition Period";
+        const nextPeriod = schedule.find(p => parseTime(p.start) > now);
+        if (nextPeriod) {
+          const diff = parseTime(nextPeriod.start) - now;
+          document.getElementById("timer").innerText = formatTime(diff) + " until " + nextPeriod.name;
+        }
+      }
+    }
+
+    function formatTime(ms) {
+      let totalSeconds = Math.floor(ms / 1000);
+      let minutes = Math.floor(totalSeconds / 60);
+      let seconds = totalSeconds % 60;
+      return `${minutes}m ${seconds < 10 ? "0" : ""}${seconds}s`;
+    }
+
+    function updateScheduleTable(schedule) {
+      const tbody = document.querySelector("#schedule-table tbody");
+      tbody.innerHTML = "";
+      if (!schedule.length) return;
+      const day = (new Date().getDay() === 3) ? "Wednesday" : "Regular Day";
+      const now = new Date();
+
+      schedule.forEach(p => {
+        const start = parseTime(p.start);
+        const end = parseTime(p.end);
+        const row = document.createElement("tr");
+        row.innerHTML = `<td>${p.name}</td><td>${p.start}</td><td>${p.end}</td><td>${day}</td>`;
+        if (now >= start && now < end) row.classList.add("current");
+        tbody.appendChild(row);
+      });
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+</body>
 </html>
